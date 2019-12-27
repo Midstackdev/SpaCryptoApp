@@ -47,21 +47,51 @@
 		    </div>
 
 		    <div class="navbar-end">
-		    	<router-link :to="{ name: 'timeline' }" class="navbar-item">
-		    	  Timeline
-		    	</router-link>
-		      <div class="navbar-item">
-		        <div class="buttons">
-		          <router-link :to="{ name: 'register' }" class="button is-primary">
-		            <strong>Sign up</strong>
-		          </router-link>
-		          <router-link :to="{ name: 'login' }" class="button is-light">
-		            Log in
-		          </router-link>
-		        </div>
-		      </div>
+		    	<template v-if="user.authenticated">
+			    	<router-link :to="{ name: 'timeline' }" class="navbar-item">
+			    	  Timeline
+			    	</router-link>
+			    	<div class="navbar-item has-dropdown is-hoverable">
+			    	  <a class="navbar-link">
+			    	    {{ user.data.name }}
+			    	  </a>
+
+			    	  <div class="navbar-dropdown">
+			    	    <a class="navbar-item">
+			    	      Account
+			    	    </a>
+			    	    <a class="navbar-item">
+			    	      Logout
+			    	    </a>
+			    	  </div>
+			       </div>
+		       </template>
+		       <template v-if="!user.authenticated">
+			      <div class="navbar-item">
+			        <div class="buttons">
+			          <router-link :to="{ name: 'register' }" class="button is-primary">
+			            <strong>Sign up</strong>
+			          </router-link>
+			          <router-link :to="{ name: 'login' }" class="button is-light">
+			            Log in
+			          </router-link>
+			        </div>
+			      </div>
+		      </template>
 		    </div>
 		  </div>
 		</nav>
 	</div>
 </template>
+
+<script>
+	import { mapGetters } from 'vuex'
+
+	export default {
+		computed: {
+			...mapGetters({
+				user: 'auth/user'
+			})
+		}
+	}
+</script>
