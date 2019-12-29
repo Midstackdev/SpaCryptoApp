@@ -76,6 +76,7 @@
 
 						if (isEmpty(name)) {
 							this.$router.replace({ name: 'timeline' })
+							return
 						}
 
 						this.$router.replace({ name: name })
