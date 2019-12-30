@@ -57,9 +57,9 @@
 			    	  </a>
 
 			    	  <div class="navbar-dropdown">
-			    	    <a class="navbar-item">
+			    	    <router-link :to="{ name: 'account' }" class="navbar-item">
 			    	      Account
-			    	    </a>
+			    	    </router-link>
 			    	    <a class="navbar-item" @click.prevent="signout">
 			    	      Logout
 			    	    </a>
