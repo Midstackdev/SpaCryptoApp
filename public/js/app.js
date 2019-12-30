@@ -1914,6 +1914,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1943,8 +1950,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {//
+  data: function data() {
+    return {
+      name: null,
+      email: null,
+      errors: []
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    user: 'auth/user'
+  })),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    updateUserProfile: 'account/updateUserProfile'
+  }), {
+    fillUserData: function fillUserData() {
+      this.name = this.user.data.name;
+      this.email = this.user.data.email;
+    },
+    submit: function submit() {
+      this.updateUserProfile({
+        payload: {
+          name: this.name,
+          email: this.email
+        },
+        context: this
+      });
+    }
+  }),
+  mounted: function mounted() {
+    this.fillUserData();
   }
 });
 
@@ -22888,30 +22930,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("section", { staticClass: "section" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("h1", { staticClass: "title" }, [_vm._v("Account profile")]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("form", { attrs: { action: "" } }, [
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "title" }, [_vm._v("Account profile")]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
             _c("div", { staticClass: "field" }, [
               _c("label", { staticClass: "label" }, [_vm._v("Name")]),
               _vm._v(" "),
               _c("div", { staticClass: "control" }, [
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
                   staticClass: "input",
-                  attrs: { type: "text", placeholder: "e.g Alex Smith" }
+                  class: { "is-danger": _vm.errors.name },
+                  attrs: { type: "text", placeholder: "e.g Alex Smith" },
+                  domProps: { value: _vm.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
+                  }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.errors.name
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.name[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "field" }, [
@@ -22919,23 +22992,61 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("div", { staticClass: "control" }, [
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.email,
+                      expression: "email"
+                    }
+                  ],
                   staticClass: "input",
+                  class: { "is-danger": _vm.errors.email },
                   attrs: {
                     type: "email",
                     placeholder: "e.g. alexsmith@gmail.com"
+                  },
+                  domProps: { value: _vm.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.email = $event.target.value
+                    }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.errors.email
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.email[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "control" }, [
-              _c("button", { staticClass: "button is-primary" }, [
-                _vm._v("Submit")
-              ])
-            ])
-          ])
-        ])
+            _vm._m(0)
+          ]
+        )
       ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-primary", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      )
     ])
   }
 ]
@@ -40394,6 +40505,34 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/account/vuex/actions.js ***!
   \**************************************************/
+/*! exports provided: updateUserProfile */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserProfile", function() { return updateUserProfile; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var updateUserProfile = function updateUserProfile(_ref, _ref2) {
+  var commit = _ref.commit;
+  var payload = _ref2.payload,
+      context = _ref2.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/profile', payload).then(function (response) {
+    commit('auth/setUserData', response.data.data, {
+      root: true
+    });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/app/account/vuex/getters.js":
+/*!**************************************************!*\
+  !*** ./resources/js/app/account/vuex/getters.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -40414,7 +40553,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mutations */ "./resources/js/app/account/vuex/mutations.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mutations__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./resources/js/app/account/vuex/actions.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getters */ "./resources/js/app/account/vuex/getters.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -40424,7 +40564,7 @@ __webpack_require__.r(__webpack_exports__);
   state: _state__WEBPACK_IMPORTED_MODULE_0__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_1__,
   actions: _actions__WEBPACK_IMPORTED_MODULE_2__,
-  getters: _actions__WEBPACK_IMPORTED_MODULE_2__
+  getters: _getters__WEBPACK_IMPORTED_MODULE_3__
 });
 
 /***/ }),

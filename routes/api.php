@@ -14,7 +14,7 @@ Route::get('/timeline', 'TimelineController@index');
 /**
  * Account
  */
-Route::group(['prefix' => 'account', 'middleware' => ['auth']], function() {
+Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	Route::get('/', 'Account\AccountController@index');
 
 	/**
