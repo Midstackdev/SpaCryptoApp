@@ -10,6 +10,7 @@ Route::group(['namespace' => 'Auth'], function() {
 });
 
 Route::get('/timeline', 'TimelineController@index');
+Route::get('/token', 'TimelineController@token');
 
 /**
  * Account

@@ -7,7 +7,7 @@
 						<p class="title">Register</p>
 						<hr>
 						<form @submit.prevent="submit">
-							<div class="notification is-success">
+							<div class="notification is-success" v-if="false">
 								<button class="delete"></button>
 								Please check your email to verify
 							</div>
@@ -81,7 +81,11 @@
 
 					context: this
 				}).then(() => {
-					this.$router.replace({ name: 'timeline' })
+					this.name = null
+					this.email = null
+					this.password = null
+					this.errors = []
+					this.$router.replace({ name: 'home' })
 				})
 			}
 		}

@@ -8,8 +8,8 @@ export const register = ({ dispatch }, { payload, context }) => {
 		console.log(response)
 		// verify email on register ok
 		
-		dispatch('setToken', response.data.meta.token).then(() => {
-			dispatch('fetchUser')
+		dispatch('flashMessage', response.data.meta.success, {root: true}).then(() => {
+			//redirect
 		})
 	}).catch((error) => {
 		context.errors = error.response.data.errors

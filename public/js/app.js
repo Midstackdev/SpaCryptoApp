@@ -2292,8 +2292,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         context: this
       }).then(function () {
+        _this.name = null;
+        _this.email = null;
+        _this.password = null;
+        _this.errors = [];
+
         _this.$router.replace({
-          name: 'timeline'
+          name: 'home'
         });
       });
     }
@@ -24199,7 +24204,9 @@ var render = function() {
                 }
               },
               [
-                _vm._m(0),
+                false
+                  ? undefined
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "field" }, [
                   _c(
@@ -24330,7 +24337,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ]
             )
           ])
@@ -24340,15 +24347,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "notification is-success" }, [
-      _c("button", { staticClass: "delete" }),
-      _vm._v("\n\t\t\t\t\t\t\tPlease check your email to verify\n\t\t\t\t\t\t")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -41781,8 +41779,9 @@ var register = function register(_ref, _ref2) {
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', payload).then(function (response) {
     console.log(response); // verify email on register ok
 
-    dispatch('setToken', response.data.meta.token).then(function () {
-      dispatch('fetchUser');
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    }).then(function () {//redirect
     });
   })["catch"](function (error) {
     context.errors = error.response.data.errors;
