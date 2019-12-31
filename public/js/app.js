@@ -2001,15 +2001,88 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {//
-  }
+  data: function data() {
+    return {
+      password_current: null,
+      password: null,
+      password_confirmation: null,
+      errors: []
+    };
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    updateUserPassword: 'account/updateUserPassword'
+  }), {
+    submit: function submit() {
+      var _this = this;
+
+      this.updateUserPassword({
+        payload: {
+          password_current: this.password_current,
+          password: this.password,
+          password_confirmation: this.password_confirmation
+        },
+        context: this
+      }).then(function () {
+        _this.password_current = null;
+        _this.password = null;
+        _this.password_confirmation = null;
+        _this.errors = [];
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -23071,14 +23144,164 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "title" }, [_vm._v("Change password")]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [
+                _vm._v("Current password")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password_current,
+                      expression: "password_current"
+                    }
+                  ],
+                  staticClass: "input",
+                  class: { "is-danger": _vm.errors.password_current },
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.password_current },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password_current = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.errors.password_current
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.password_current[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [_vm._v("New password")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "input",
+                  class: { "is-danger": _vm.errors.password },
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.errors.password
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.password[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [
+                _vm._v("Confirm new password")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password_confirmation,
+                      expression: "password_confirmation"
+                    }
+                  ],
+                  staticClass: "input",
+                  class: { "is-danger": _vm.errors.password_confirmation },
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.password_confirmation },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password_confirmation = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.errors.password_confirmation
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.password_confirmation[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("chanage password")])])
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-primary", attrs: { type: "submit" } },
+        [_vm._v("Change password")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -40505,12 +40728,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/account/vuex/actions.js ***!
   \**************************************************/
-/*! exports provided: updateUserProfile */
+/*! exports provided: updateUserProfile, updateUserPassword */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserProfile", function() { return updateUserProfile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserPassword", function() { return updateUserPassword; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -40522,6 +40746,16 @@ var updateUserProfile = function updateUserProfile(_ref, _ref2) {
     commit('auth/setUserData', response.data.data, {
       root: true
     });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
+var updateUserPassword = function updateUserPassword(_ref3, _ref4) {
+  var commit = _ref3.commit;
+  var payload = _ref4.payload,
+      context = _ref4.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/password', payload).then(function (response) {
+    console.log(response);
   })["catch"](function (error) {
     context.errors = error.response.data.errors;
   });

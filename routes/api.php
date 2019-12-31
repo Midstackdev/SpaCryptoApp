@@ -22,4 +22,8 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	 */
 	Route::get('profile', 'Account\ProfileController@index');
 	Route::post('profile', 'Account\ProfileController@store');
+	/**
+	 * Password
+	 */
+	Route::post('password', 'Account\PasswordController@store');
 });
