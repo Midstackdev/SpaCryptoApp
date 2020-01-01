@@ -41,11 +41,32 @@ class SignInController extends Controller
     	}
 
     	// check if is active
-
-    	return (new PrivateUserResource($request->user()))->additional([
+        return $this->authenticated($request, $this->guard()->user())
+                ?: 
+    	(new PrivateUserResource($request->user()))->additional([
     		'meta' => [
     			'token' => $token
     		]
     	]);
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasNotActivated()) {
+            $this->guard()->logout();
+
+            return response()->json([
+                'data' => [
+                    'error' => 'Your account is not active.'
+                ],
+            ],403);
+        }
     }
 }

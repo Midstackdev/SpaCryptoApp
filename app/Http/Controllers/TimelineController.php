@@ -17,11 +17,4 @@ class TimelineController extends Controller
     		'data' => 'Timeline index'
     	], 200);
     }
-
-    public function token(Request $request)
-    {
-        $token = $request->user()->generateConfirmationToken();
-
-        dd($token);
-    }
 }

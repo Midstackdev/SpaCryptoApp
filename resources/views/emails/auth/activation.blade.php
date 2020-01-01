@@ -3,8 +3,8 @@
 
 Click the button to activate your account.
 
-@component('mail::button', ['url' => ''])
-Activate {{ $token }}
+@component('mail::button', ['url' => $url])
+Activate
 @endcomponent
 
 Thanks,<br>

@@ -5,7 +5,7 @@ import localforage from 'localforage'
 
 export const register = ({ dispatch }, { payload, context }) => {
 	return axios.post('/api/register', payload).then((response) => {
-		console.log(response)
+		// console.log(response)
 		// verify email on register ok
 		
 		dispatch('flashMessage', response.data.meta.success, {root: true}).then(() => {
@@ -25,7 +25,24 @@ export const login = ({ dispatch }, { payload, context }) => {
 			dispatch('fetchUser')
 		})
 	}).catch((error) => {
+		if (error.response.status === 403) {
+			dispatch('flashMessage', error.response.data.data.error, {root: true})
+			return
+		}
 		context.errors = error.response.data.errors
+		console.log(error.response)
+	})
+}
+
+export const activateUser = ({ dispatch }, { url } ) => {
+	return axios.get(url).then((response) => {
+		console.log(response)
+		
+		// dispatch('setToken', response.data.meta.token).then(() => {
+		// 	dispatch('fetchUser')
+		// })
+	}).catch((error) => {
+		console.log(error)
 	})
 }
 

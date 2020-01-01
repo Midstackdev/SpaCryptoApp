@@ -10,7 +10,6 @@ Route::group(['namespace' => 'Auth'], function() {
 });
 
 Route::get('/timeline', 'TimelineController@index');
-Route::get('/token', 'TimelineController@token');
 
 /**
  * Account
@@ -27,4 +26,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	 * Password
 	 */
 	Route::post('password', 'Account\PasswordController@store');
+});
+
+/**
+ * Activation
+ */
+Route::group(['prefix' => 'activation', 'middleware' => ['guest', 'confirmation_token.expire']], function() {
+    Route::get('/{confirmation_token}', 'Auth\ActivationController@activate')->name('activation.activate');
 });
