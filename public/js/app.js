@@ -1838,15 +1838,65 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {//
-  }
+  data: function data() {
+    return {
+      password_current: null,
+      errors: []
+    };
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    deactivateAccount: 'account/deactivateAccount'
+  }), {
+    submit: function submit() {
+      var _this = this;
+
+      this.deactivateAccount({
+        payload: {
+          password_current: this.password_current
+        },
+        context: this
+      }).then(function () {
+        _this.$router.replace({
+          name: 'home'
+        });
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -23932,14 +23982,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "section" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("h1", { staticClass: "title" }, [_vm._v("Deactivate your account")]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.submit($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "field" }, [
+              _c("label", { staticClass: "label" }, [
+                _vm._v("Current password")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "control" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password_current,
+                      expression: "password_current"
+                    }
+                  ],
+                  staticClass: "input",
+                  class: { "is-danger": _vm.errors.password_current },
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.password_current },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password_current = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _vm.errors.password_current
+                ? _c("p", { staticClass: "help is-danger" }, [
+                    _vm._v(
+                      "\n\t\t\t\t  \t" +
+                        _vm._s(_vm.errors.password_current[0]) +
+                        "\n\t\t\t\t  "
+                    )
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("p", [_vm._v("account deactivate")])])
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-primary", attrs: { type: "submit" } },
+        [_vm._v("Deactivate account")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -42276,15 +42396,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/account/vuex/actions.js ***!
   \**************************************************/
-/*! exports provided: updateUserProfile, updateUserPassword */
+/*! exports provided: updateUserProfile, updateUserPassword, deactivateAccount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserProfile", function() { return updateUserProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserPassword", function() { return updateUserPassword; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deactivateAccount", function() { return deactivateAccount; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ "./resources/js/helpers/index.js");
+
 
 var updateUserProfile = function updateUserProfile(_ref, _ref2) {
   var commit = _ref.commit,
@@ -42308,6 +42431,30 @@ var updateUserPassword = function updateUserPassword(_ref3, _ref4) {
   var payload = _ref4.payload,
       context = _ref4.context;
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/password', payload).then(function (response) {
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
+var deactivateAccount = function deactivateAccount(_ref5, _ref6) {
+  var commit = _ref5.commit,
+      dispatch = _ref5.dispatch;
+  var payload = _ref6.payload,
+      context = _ref6.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/deactivate', payload).then(function (response) {
+    // dispatch('auth/logout', {root: true})
+    commit('auth/setAuthenticated', false, {
+      root: true
+    });
+    commit('auth/setUserData', null, {
+      root: true
+    });
+    commit('auth/setToken', null, {
+      root: true
+    });
+    Object(_helpers__WEBPACK_IMPORTED_MODULE_1__["setHttpToken"])(null);
     dispatch('flashMessage', response.data.meta.success, {
       root: true
     });

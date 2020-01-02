@@ -26,6 +26,11 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	 * Password
 	 */
 	Route::post('password', 'Account\PasswordController@store');
+
+	/**
+	 * Deactivate
+	 */
+	Route::post('deactivate', 'Account\DeactivateController@store');
 });
 
 /**

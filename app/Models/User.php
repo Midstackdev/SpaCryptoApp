@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Models\Traits\HasConfirmationToken;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, HasConfirmationToken;
+    use Notifiable, HasConfirmationToken, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -61,7 +62,7 @@ class User extends Authenticatable implements JWTSubject
 
      public function hasActivated()
      {
-        return $this->active;
+        return $this->activated;
      }
 
      public function hasNotActivated()
