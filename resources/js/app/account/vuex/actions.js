@@ -20,6 +20,15 @@ export const updateUserPassword = ({ commit, dispatch }, { payload, context }) =
 	})
 }
 
+export const fetchCountries = ({ commit, dispatch }) => {
+
+	return axios.get('/api/account/twofactor').then((response) => {
+		commit('setCountries', response.data.data)
+	}).catch((error) => {
+		context.errors = error.response.data.errors
+	})
+}
+
 export const deactivateAccount = ({ commit, dispatch }, { payload, context }) => {
 
 	return axios.post('/api/account/deactivate', payload).then((response) => {

@@ -21,7 +21,7 @@
          <router-link :to="{ name: 'account.deactivate'}">Deactivate account</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'account.profile'}">Twofactor authentication</router-link>
+          <router-link :to="{ name: 'account.twofactor'}">Twofactor authentication</router-link>
         </li>
       </ul>
       <p class="menu-label">

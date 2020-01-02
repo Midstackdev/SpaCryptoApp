@@ -31,6 +31,12 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	 * Deactivate
 	 */
 	Route::post('deactivate', 'Account\DeactivateController@store');
+
+	/**
+	 * Twofactor
+	 */
+	Route::get('twofactor', 'Account\TwoFactorController@index');
+	Route::post('twofactor', 'Account\TwoFactorController@store');
 });
 
 /**

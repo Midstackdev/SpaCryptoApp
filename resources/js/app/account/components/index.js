@@ -5,3 +5,4 @@ export const AccountOverview = Vue.component('account', require('./AccountOvervi
 export const AccountProfile = Vue.component('account-profile', require('./AccountProfile.vue').default)
 export const ChanagePassword = Vue.component('account-password', require('./ChanagePassword.vue').default)
 export const AccountDeactivate = Vue.component('account-deactivate', require('./AccountDeactivate.vue').default)
+export const TwoFactor = Vue.component('two-factor', require('./TwoFactor.vue').default)
