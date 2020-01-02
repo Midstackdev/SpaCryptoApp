@@ -38,9 +38,9 @@
 							</div>
 							<div class="field is-grouped is-grouped-centered">
 							  <p class="control">
-							    <a class="">
+							    <router-link :to="{ name: 'password.forget'}" class="">
 							      Forgot password? 
-							    </a>
+							    </router-link>
 							  </p>
 							  <p class="control">
 							    <router-link :to="{ name: 'email.verify'}" class="">

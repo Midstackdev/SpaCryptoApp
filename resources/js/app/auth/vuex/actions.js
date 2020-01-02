@@ -61,6 +61,14 @@ export const resendActivation = ({ dispatch }, { payload, context } ) => {
 	})
 }
 
+export const resendPassword = ({ dispatch }, { payload, context } ) => {
+	return axios.post('/api/password/resend', payload).then((response) => {
+		dispatch('flashMessage', response.data.data.success, {root: true})
+	}).catch((error) => {
+		context.errors = error.response.data.errors
+	})
+}
+
 export const logout = ({ dispatch }) => {
 	return axios.post('/api/logout').then((response) => {
 		dispatch('clearAuth')

@@ -1,4 +1,4 @@
-import { Login, Register, VerifyEmail } from '../components'
+import { Login, Register, VerifyEmail, ForgotPassword, ResetPassword } from '../components'
 
 export default [
 	{
@@ -23,6 +23,24 @@ export default [
 		path: '/verify-email',
 		component: VerifyEmail,
 		name: 'email.verify',
+		meta: {
+			guest: true,
+			needsAuth: false
+		}
+	},
+	{
+		path: '/forgot-password',
+		component: ForgotPassword,
+		name: 'password.forget',
+		meta: {
+			guest: true,
+			needsAuth: false
+		}
+	},
+	{
+		path: '/password-reset',
+		component: ResetPassword,
+		name: 'password.reset',
 		meta: {
 			guest: true,
 			needsAuth: false

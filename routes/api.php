@@ -35,3 +35,11 @@ Route::group(['prefix' => 'activation', 'middleware' => ['guest']], function() {
     Route::post('/resend', 'Auth\ActivationResendController@store');
     Route::get('/{confirmation_token}', 'Auth\ActivationController@activate')->name('activation.activate');
 });
+
+/**
+ * Password reset
+ */
+Route::group(['prefix' => 'password', 'middleware' => ['guest']], function() {
+    Route::post('/resend', 'Auth\ForgotPasswordResendController@store');
+    Route::post('/{confirmation_token}', 'Auth\ForgotPasswordResetController@reset')->name('password.reset');
+});
