@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ActivationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['confirmation_token.expire']);
+    }
 
     public function activate(ConfirmationToken $token, Request $request)
     {

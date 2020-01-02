@@ -12,9 +12,9 @@ export default [
 		
 	},
 	{	
-		path: '/verify-email',
+		path: '/email-verified',
 		component: EmailVerified,
-		name: 'email.verify',
+		name: 'email.verified',
 		meta: {
 			// guest: true,
 			needsAuth: false

@@ -1,4 +1,4 @@
-import { Login, Register } from '../components'
+import { Login, Register, VerifyEmail } from '../components'
 
 export default [
 	{
@@ -14,6 +14,15 @@ export default [
 		path: '/register',
 		component: Register,
 		name: 'register',
+		meta: {
+			guest: true,
+			needsAuth: false
+		}
+	},
+	{
+		path: '/verify-email',
+		component: VerifyEmail,
+		name: 'email.verify',
 		meta: {
 			guest: true,
 			needsAuth: false

@@ -36,6 +36,18 @@
 									</button>
 								</p>
 							</div>
+							<div class="field is-grouped is-grouped-centered">
+							  <p class="control">
+							    <a class="">
+							      Forgot password? 
+							    </a>
+							  </p>
+							  <p class="control">
+							    <router-link :to="{ name: 'email.verify'}" class="">
+							      Resend activation mail.
+							    </router-link>
+							  </p>
+							</div>
 						</form>
 					</div>
 				</div>
