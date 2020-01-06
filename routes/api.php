@@ -37,6 +37,9 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth:api']], function() {
 	 */
 	Route::get('twofactor', 'Account\TwoFactorController@index');
 	Route::post('twofactor', 'Account\TwoFactorController@store');
+	Route::post('twofactor/verify', 'Account\TwoFactorController@verify');
+	Route::delete('twofactor', 'Account\TwoFactorController@destroy');
+	Route::get('twofactor/resend', 'Account\TwoFactorController@getResend');
 });
 
 /**

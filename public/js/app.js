@@ -2196,23 +2196,105 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dial_code: null,
+      dial_code: '',
       phone_number: null,
+      token: null,
       errors: []
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    countries: 'account/countries'
+    countries: 'account/countries',
+    user: 'auth/user'
   })),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    fetchCountries: 'account/fetchCountries'
+    fetchCountries: 'account/fetchCountries',
+    enableTwoFactor: 'account/enableTwoFactor',
+    verifyTwoFactor: 'account/verifyTwoFactor',
+    disableTwoFactor: 'account/disableTwoFactor',
+    getResendToken: 'account/getResendToken'
   }), {
     submit: function submit() {
-      console.log(this.countries);
+      var _this = this;
+
+      this.enableTwoFactor({
+        payload: {
+          dial_code: this.dial_code,
+          phone_number: this.phone_number
+        },
+        context: this
+      }).then(function () {
+        _this.dial_code = '';
+        _this.phone_number = null;
+      });
+    },
+    verify: function verify() {
+      this.verifyTwoFactor({
+        payload: {
+          token: this.token
+        },
+        context: this
+      }).then(function () {//refresh page
+        //this.$router.go()
+      });
+    },
+    disable: function disable() {
+      this.disableTwoFactor().then(function () {//refresh page
+        //this.$router.go()
+      });
+    },
+    getToken: function getToken() {
+      this.getResendToken();
     }
   }),
   mounted: function mounted() {
@@ -24553,114 +24635,321 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("section", { staticClass: "section" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("h1", { staticClass: "title" }, [_vm._v("Enable two factor lgoin")]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.submit($event)
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "field" }, [
-              _c("label", { staticClass: "label" }, [_vm._v("Country code")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "control is-expanded" }, [
-                _c("div", { staticClass: "select is-fullwidth" }, [
-                  _c(
-                    "select",
-                    { class: { "is-danger": _vm.errors.dial_code } },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Country")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.countries, function(country) {
-                        return _c(
-                          "option",
-                          { key: country.id, domProps: { value: country.id } },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t    \t\t\t" +
-                                _vm._s(country.name) +
-                                " (+" +
-                                _vm._s(country.code) +
-                                ")\n\t\t\t\t    \t\t"
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.errors.dial_code
-                ? _c("p", { staticClass: "help is-danger" }, [
-                    _vm._v(
-                      "\n\t\t\t\t  \t" +
-                        _vm._s(_vm.errors.dial_code[0]) +
-                        "\n\t\t\t\t  "
-                    )
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "field" }, [
-              _c("label", { staticClass: "label" }, [_vm._v("Phone number")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "control" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.phone_number,
-                      expression: "phone_number"
-                    }
-                  ],
-                  staticClass: "input",
-                  class: { "is-danger": _vm.errors.phone_number },
-                  attrs: { type: "password" },
-                  domProps: { value: _vm.phone_number },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c("h1", { staticClass: "title" }, [_vm._v("Two factor login")]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm.user.data.twoFaEnabled
+            ? [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.disable($event)
                       }
-                      _vm.phone_number = $event.target.value
                     }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm.errors.phone_number
-                ? _c("p", { staticClass: "help is-danger" }, [
-                    _vm._v(
-                      "\n\t\t\t\t  \t" +
-                        _vm._s(_vm.errors.phone_number[0]) +
-                        "\n\t\t\t\t  "
-                    )
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ])
+                  },
+                  [_vm._m(0), _vm._v(" "), _vm._m(1)]
+                )
+              ]
+            : [
+                _vm.user.data.twoFaVerified
+                  ? [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.verify($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "field" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("Verification token")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "control" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.token,
+                                    expression: "token"
+                                  }
+                                ],
+                                staticClass: "input",
+                                class: { "is-danger": _vm.errors.token },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.token },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.token = $event.target.value
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _vm.errors.token
+                              ? _c("p", { staticClass: "help is-danger" }, [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t  \t" +
+                                      _vm._s(_vm.errors.token[0]) +
+                                      "\n\t\t\t\t\t\t  "
+                                  )
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "field is-grouped is-grouped-centered"
+                            },
+                            [
+                              _c("p", { staticClass: "control" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "button is-primary",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.getToken($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t      Resend token\n\t\t\t\t\t\t    "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(3)
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  : [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.submit($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "field" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("Country code")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "control is-expanded" }, [
+                              _c(
+                                "div",
+                                { staticClass: "select is-fullwidth" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.dial_code,
+                                          expression: "dial_code"
+                                        }
+                                      ],
+                                      class: {
+                                        "is-danger": _vm.errors.dial_code
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.dial_code = $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "", selected: "" } },
+                                        [_vm._v("Country")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.countries, function(country) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: country.id,
+                                            domProps: { value: country.code }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t    \t\t\t" +
+                                                _vm._s(country.name) +
+                                                " (+" +
+                                                _vm._s(country.code) +
+                                                ")\n\t\t\t\t\t\t    \t\t"
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.errors.dial_code
+                              ? _c("p", { staticClass: "help is-danger" }, [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t  \t" +
+                                      _vm._s(_vm.errors.dial_code[0]) +
+                                      "\n\t\t\t\t\t\t  "
+                                  )
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "field" }, [
+                            _c("label", { staticClass: "label" }, [
+                              _vm._v("Phone number")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "control" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.phone_number,
+                                    expression: "phone_number"
+                                  }
+                                ],
+                                staticClass: "input",
+                                class: { "is-danger": _vm.errors.phone_number },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.phone_number },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.phone_number = $event.target.value
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _vm.errors.phone_number
+                              ? _c("p", { staticClass: "help is-danger" }, [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t  \t" +
+                                      _vm._s(_vm.errors.phone_number[0]) +
+                                      "\n\t\t\t\t\t\t  "
+                                  )
+                                ])
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(4)
+                        ]
+                      )
+                    ]
+              ]
+        ],
+        2
+      )
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Disable two factor")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("p", [
+          _vm._v("Two factor authentication is enabled on your account.")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-primary", attrs: { type: "submit" } },
+        [_vm._v("Disable")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-primary", attrs: { type: "submit" } },
+        [_vm._v("Verify")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control" }, [
+      _c("a", { staticClass: "button is-light" }, [
+        _vm._v("\n\t\t\t\t\t\t      Cancel\n\t\t\t\t\t\t    ")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42705,13 +42994,17 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/account/vuex/actions.js ***!
   \**************************************************/
-/*! exports provided: updateUserProfile, updateUserPassword, fetchCountries, deactivateAccount */
+/*! exports provided: updateUserProfile, updateUserPassword, enableTwoFactor, verifyTwoFactor, disableTwoFactor, getResendToken, fetchCountries, deactivateAccount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserProfile", function() { return updateUserProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserPassword", function() { return updateUserPassword; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enableTwoFactor", function() { return enableTwoFactor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "verifyTwoFactor", function() { return verifyTwoFactor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "disableTwoFactor", function() { return disableTwoFactor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getResendToken", function() { return getResendToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCountries", function() { return fetchCountries; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deactivateAccount", function() { return deactivateAccount; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -42748,20 +43041,74 @@ var updateUserPassword = function updateUserPassword(_ref3, _ref4) {
     context.errors = error.response.data.errors;
   });
 };
-var fetchCountries = function fetchCountries(_ref5) {
+var enableTwoFactor = function enableTwoFactor(_ref5, _ref6) {
   var commit = _ref5.commit,
       dispatch = _ref5.dispatch;
+  var payload = _ref6.payload,
+      context = _ref6.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/twofactor', payload).then(function (response) {
+    commit('auth/setUserData', response.data.data, {
+      root: true
+    });
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors; // console.log(error.response.data.errors)
+  });
+};
+var verifyTwoFactor = function verifyTwoFactor(_ref7, _ref8) {
+  var commit = _ref7.commit,
+      dispatch = _ref7.dispatch;
+  var payload = _ref8.payload,
+      context = _ref8.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/twofactor/verify', payload).then(function (response) {
+    commit('auth/setUserData', response.data.data, {
+      root: true
+    });
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors; // console.log(error.response.data.errors)
+  });
+};
+var disableTwoFactor = function disableTwoFactor(_ref9) {
+  var commit = _ref9.commit,
+      dispatch = _ref9.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/account/twofactor').then(function (response) {
+    commit('auth/setUserData', response.data.data, {
+      root: true
+    });
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    });
+  })["catch"](function (error) {// context.errors = error.response.data.errors
+    // console.log(error.response.data.errors)
+  });
+};
+var getResendToken = function getResendToken(_ref10) {
+  var commit = _ref10.commit,
+      dispatch = _ref10.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/account/twofactor/resend').then(function (response) {
+    console.log(response); // commit('setCountries', response.data.data)
+  })["catch"](function (error) {// console.log(error.response.data.errors)
+  });
+};
+var fetchCountries = function fetchCountries(_ref11) {
+  var commit = _ref11.commit,
+      dispatch = _ref11.dispatch;
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/account/twofactor').then(function (response) {
     commit('setCountries', response.data.data);
   })["catch"](function (error) {
-    context.errors = error.response.data.errors;
+    console.log(error.response.data.errors);
   });
 };
-var deactivateAccount = function deactivateAccount(_ref6, _ref7) {
-  var commit = _ref6.commit,
-      dispatch = _ref6.dispatch;
-  var payload = _ref7.payload,
-      context = _ref7.context;
+var deactivateAccount = function deactivateAccount(_ref12, _ref13) {
+  var commit = _ref12.commit,
+      dispatch = _ref12.dispatch;
+  var payload = _ref13.payload,
+      context = _ref13.context;
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/account/deactivate', payload).then(function (response) {
     // dispatch('auth/logout', {root: true})
     commit('auth/setAuthenticated', false, {

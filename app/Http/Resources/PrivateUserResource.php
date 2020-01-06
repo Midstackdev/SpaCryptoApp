@@ -18,6 +18,8 @@ class PrivateUserResource extends JsonResource
             'id' =>$this->id,
             'name' =>$this->name,
             'email' =>$this->email,
+            'twoFaVerified' => $this->twoFactorPendingVerification(),
+            'twoFaEnabled' => $this->twoFactorEnabled(),
         ];
     }
 }
