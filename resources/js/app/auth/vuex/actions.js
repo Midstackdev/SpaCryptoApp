@@ -29,6 +29,10 @@ export const login = ({ dispatch }, { payload, context }) => {
 			dispatch('flashMessage', error.response.data.data.error, {root: true})
 			return
 		}
+		if (error.response.status === 307) {
+			dispatch('flashMessage', error.response.data.data.error, {root: true})
+			return
+		}
 		context.errors = error.response.data.errors
 		console.log(error.response)
 	})
@@ -43,6 +47,17 @@ export const activateUser = ({ dispatch }, { url } ) => {
 		// })
 	}).catch((error) => {
 		console.log(error)
+	})
+}
+
+export const verifyLogin = ({ commit, dispatch }, { payload, context }) => {
+
+	return axios.post('/api/login/verify', payload).then((response) => {
+		// commit('auth/setUserData', response.data.data, {root: true})
+		// dispatch('flashMessage', response.data.meta.success, {root: true})
+	}).catch((error) => {
+		context.errors = error.response.data.errors
+		// console.log(error.response.data.errors)
 	})
 }
 

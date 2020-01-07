@@ -68,5 +68,25 @@ class SignInController extends Controller
                 ],
             ],403);
         }
+
+        if ($user->twoFactorEnabled()) {
+            // return $this->startTwoFactorAuthentication($request, $user);
+        }
+    }
+
+    protected function startTwoFactorAuthentication(Request $request, $user)
+    {
+        session()->put('twofactor', (object) [
+            'user_id' => $user->id,
+            'remember' => $request->has('remember')
+        ]);
+
+        $this->guard()->logout();
+
+        return response()->json([
+            'data' => [
+                'error' => 'Enter your sms token to login.'
+            ],
+        ],307);
     }
 }

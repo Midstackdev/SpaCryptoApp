@@ -23,31 +23,31 @@
 		        Documentation
 		      </a>
 
-		      <div class="navbar-item has-dropdown is-hoverable">
-		        <a class="navbar-link">
-		          More
-		        </a>
-
-		        <div class="navbar-dropdown">
-		          <a class="navbar-item">
-		            About
-		          </a>
-		          <a class="navbar-item">
-		            Jobs
-		          </a>
-		          <a class="navbar-item">
-		            Contact
-		          </a>
-		          <hr class="navbar-divider">
-		          <a class="navbar-item">
-		            Report an issue
-		          </a>
-		        </div>
-		      </div>
 		    </div>
 
 		    <div class="navbar-end">
 		    	<template v-if="user.authenticated">
+		    		<div class="navbar-item has-dropdown is-hoverable">
+				        <a class="navbar-link">
+				          Portfolio
+				        </a>
+
+				        <div class="navbar-dropdown">
+				          <router-link :to="{ name: 'portfolio.index'}" class="navbar-item">
+				            Account
+				          </router-link>
+				          <a class="navbar-item">
+				            All transactions
+				          </a>
+				          <a class="navbar-item">
+				            Contact
+				          </a>
+				          <hr class="navbar-divider">
+				          <a class="navbar-item">
+				            Report an issue
+				          </a>
+				        </div>
+				      </div>
 			    	<router-link :to="{ name: 'timeline' }" class="navbar-item">
 			    	  Timeline
 			    	</router-link>

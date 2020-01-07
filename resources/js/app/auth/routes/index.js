@@ -1,4 +1,4 @@
-import { Login, Register, VerifyEmail, ForgotPassword, ResetPassword } from '../components'
+import { Login, Register, VerifyEmail, ForgotPassword, ResetPassword, TwoFactorLogin } from '../components'
 
 export default [
 	{
@@ -41,6 +41,15 @@ export default [
 		path: '/password-reset',
 		component: ResetPassword,
 		name: 'password.reset',
+		meta: {
+			guest: true,
+			needsAuth: false
+		}
+	},
+	{
+		path: '/twofactor-login',
+		component: TwoFactorLogin,
+		name: 'twofactor.login',
 		meta: {
 			guest: true,
 			needsAuth: false

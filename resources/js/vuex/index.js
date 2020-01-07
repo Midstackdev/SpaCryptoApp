@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from '../app/auth/vuex'
 import account from '../app/account/vuex'
+import portfolio from '../app/portfolio/vuex'
 
 Vue.use(Vuex)
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
 	modules: {
 		auth: auth,
 		account: account,
+		portfolio: portfolio
 	}
 })

@@ -5,3 +5,4 @@ export const Register = Vue.component('register', require('./Register.vue').defa
 export const VerifyEmail = Vue.component('verify-email', require('./VerifyEmail.vue').default);
 export const ForgotPassword = Vue.component('forgot-password', require('./ForgotPassword.vue').default);
 export const ResetPassword = Vue.component('password-reset', require('./ResetPassword.vue').default);
+export const TwoFactorLogin = Vue.component('twofactor-login', require('./TwoFactorLogin.vue').default);

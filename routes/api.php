@@ -6,6 +6,8 @@ Route::group(['namespace' => 'Auth'], function() {
 	Route::post('/login', 'SignInController@login');
 	Route::get('/me', 'MeController@me');
 	Route::post('/logout', 'SignOutController@logout');
+	Route::post('/login/verify', 'TwoFactorLoginController@verify');
+	Route::get('/login/resend', 'TwoFactorLoginController@getResend');
 
 });
 
