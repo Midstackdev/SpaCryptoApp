@@ -34,4 +34,8 @@ return [
         'secret' => env('AUTHY_SECRET'),
     ],
 
+    'bitgo' => [
+        'secret' => env('BITGO_SECRET'),
+    ],
+
 ];

@@ -28,7 +28,7 @@
 						    <button class="button is-success is-small">Deposit</button>
 						</div>
 						<div class="block">
-						    <button class="button is-danger is-small">Withdraw</button>
+						    <button class="button is-danger is-small" @click.prevent="submit">Withdraw</button>
 						</div>
 				    </div>
 				  </div>
@@ -36,6 +36,7 @@
 		    </div>
 		  </div>
 		</section>
+		{{ index }}
 		<p class="title is-4">Recent transactions</p>
 		<div class="card">
 			<div class="card-content">
@@ -52,6 +53,14 @@
 			    </div>
 			</div>
 		</div>
+
+		<div class="modal">
+		  <div class="modal-background"></div>
+		  <div class="modal-content">
+		    <!-- Any other Bulma elements you want -->
+		  </div>
+		  <button class="modal-close is-large" aria-label="close"></button>
+		</div>
 	</div>
 </template>
 
@@ -64,8 +73,16 @@
 			}
 		},
 
+		methods: {
+			submit () {
+				axios.post('/api/portfolio/sendtransfer').then((response) => {
+					// this.index = response.data.data
+				})
+			}
+		},
+
 		mounted () {
-			axios.get('/api/timeline').then((response) => {
+			axios.get('/api/portfolio/gettransfers').then((response) => {
 				this.index = response.data.data
 			})
 		}

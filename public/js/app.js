@@ -3006,16 +3006,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       index: null
     };
   },
+  methods: {
+    submit: function submit() {
+      axios.post('/api/portfolio/sendtransfer').then(function (response) {// this.index = response.data.data
+      });
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/timeline').then(function (response) {
+    axios.get('/api/portfolio/gettransfers').then(function (response) {
       _this.index = response.data.data;
     });
   }
@@ -26199,88 +26214,137 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "portfolio container" }, [
+    _c("section", { staticClass: "hero is-primary" }, [
+      _c("div", { staticClass: "hero-body" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("nav", { staticClass: "level" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "level-item has-text-centered" }, [
+              _c("div", [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "block" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button is-danger is-small",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.submit($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Withdraw")]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v("\n\t" + _vm._s(_vm.index) + "\n\t"),
+    _c("p", { staticClass: "title is-4" }, [_vm._v("Recent transactions")]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _vm._m(5)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "portfolio container" }, [
-      _c("section", { staticClass: "hero is-primary" }, [
-        _c("div", { staticClass: "hero-body" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("nav", { staticClass: "level" }, [
-              _c("div", { staticClass: "level-item has-text-centered" }, [
-                _c("div", [
-                  _c("p", { staticClass: "heading" }, [_vm._v("BTC")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "title" }, [_vm._v("3,456")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-item has-text-centered" }, [
-                _c("div", [
-                  _c("p", { staticClass: "heading" }, [_vm._v("ETH")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "title" }, [_vm._v("123")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-item has-text-centered" }, [
-                _c("div", [
-                  _c("p", { staticClass: "heading" }, [_vm._v("Followers")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "title" }, [_vm._v("456K")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "level-item has-text-centered" }, [
-                _c("div", [
-                  _c("div", { staticClass: "block" }, [
-                    _c(
-                      "button",
-                      { staticClass: "button is-success is-small" },
-                      [_vm._v("Deposit")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "block" }, [
-                    _c("button", { staticClass: "button is-danger is-small" }, [
-                      _vm._v("Withdraw")
-                    ])
-                  ])
-                ])
-              ])
+    return _c("div", { staticClass: "level-item has-text-centered" }, [
+      _c("div", [
+        _c("p", { staticClass: "heading" }, [_vm._v("BTC")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "title" }, [_vm._v("3,456")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level-item has-text-centered" }, [
+      _c("div", [
+        _c("p", { staticClass: "heading" }, [_vm._v("ETH")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "title" }, [_vm._v("123")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level-item has-text-centered" }, [
+      _c("div", [
+        _c("p", { staticClass: "heading" }, [_vm._v("Followers")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "title" }, [_vm._v("456K")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block" }, [
+      _c("button", { staticClass: "button is-success is-small" }, [
+        _vm._v("Deposit")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-content" }, [
+        _c("div", { staticClass: "media" }, [
+          _c("div", { staticClass: "media-left" }, [
+            _c("figure", { staticClass: "image is-48x48" }, [
+              _c("img", {
+                attrs: {
+                  src: "https://bulma.io/images/placeholders/96x96.png",
+                  alt: "Placeholder image"
+                }
+              })
             ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "title is-4" }, [_vm._v("Recent transactions")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "media" }, [
-            _c("div", { staticClass: "media-left" }, [
-              _c("figure", { staticClass: "image is-48x48" }, [
-                _c("img", {
-                  attrs: {
-                    src: "https://bulma.io/images/placeholders/96x96.png",
-                    alt: "Placeholder image"
-                  }
-                })
-              ])
-            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-content" }, [
+            _c("p", { staticClass: "title is-4" }, [_vm._v("John Smith")]),
             _vm._v(" "),
-            _c("div", { staticClass: "media-content" }, [
-              _c("p", { staticClass: "title is-4" }, [_vm._v("John Smith")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "subtitle is-6" }, [_vm._v("@johnsmith")])
-            ])
+            _c("p", { staticClass: "subtitle is-6" }, [_vm._v("@johnsmith")])
           ])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal" }, [
+      _c("div", { staticClass: "modal-background" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "modal-content" }),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "modal-close is-large",
+        attrs: { "aria-label": "close" }
+      })
     ])
   }
 ]
