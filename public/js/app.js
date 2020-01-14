@@ -2949,6 +2949,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Modal */ "./resources/js/components/Modal.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3015,24 +3023,182 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Modal: _components_Modal__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      index: null
+      isModalVisible: false,
+      coin: '',
+      errors: []
     };
   },
-  methods: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    coins: 'portfolio/coins',
+    wallets: 'portfolio/wallets'
+  })),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    getCoins: 'portfolio/getCoins',
+    getWallets: 'portfolio/getWallets',
+    createWalllet: 'portfolio/createWalllet'
+  }), {
     submit: function submit() {
-      axios.post('/api/portfolio/sendtransfer').then(function (response) {// this.index = response.data.data
-      });
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
+      var _this = this;
 
-    axios.get('/api/portfolio/gettransfers').then(function (response) {
-      _this.index = response.data.data;
-    });
+      this.createWalllet({
+        payload: {
+          coin: this.coin
+        },
+        context: this
+      }).then(function () {
+        _this.coin = '';
+      });
+    },
+    showModal: function showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal: function closeModal() {
+      this.isModalVisible = false;
+    }
+  }),
+  mounted: function mounted() {
+    this.getCoins();
+    this.getWallets();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    wallet: 'portfolio/wallet',
+    transfers: 'portfolio/transfers'
+  })),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    getAWallet: 'portfolio/getAWallet',
+    getTransfers: 'portfolio/getTransfers'
+  })),
+  mounted: function mounted() {
+    this.getAWallet(this.$route.params.id);
+    this.getTransfers(this.$route.params.id);
   }
 });
 
@@ -3095,6 +3261,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Notification: _Notification__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Modal.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Modal.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'modal',
+  methods: {
+    close: function close() {
+      this.$emit('close');
+    }
   }
 });
 
@@ -26214,49 +26422,176 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "portfolio container" }, [
-    _c("section", { staticClass: "hero is-primary" }, [
-      _c("div", { staticClass: "hero-body" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("nav", { staticClass: "level" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c("div", { staticClass: "level-item has-text-centered" }, [
-              _c("div", [
-                _vm._m(3),
-                _vm._v(" "),
-                _c("div", { staticClass: "block" }, [
+  return _c(
+    "div",
+    { staticClass: "portfolio container" },
+    [
+      _c("section", { staticClass: "hero is-primary" }, [
+        _c("div", { staticClass: "hero-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("nav", { staticClass: "level" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item has-text-centered" }, [
+                _c("div", [
                   _c(
-                    "button",
+                    "form",
                     {
-                      staticClass: "button is-danger is-small",
                       on: {
-                        click: function($event) {
+                        submit: function($event) {
                           $event.preventDefault()
                           return _vm.submit($event)
                         }
                       }
                     },
-                    [_vm._v("Withdraw")]
+                    [
+                      _c("div", { staticClass: "block" }, [
+                        _c("div", { staticClass: "field" }, [
+                          _c("label", { staticClass: "label" }, [
+                            _vm._v("Coin")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "control is-expanded" }, [
+                            _c("div", { staticClass: "select is-fullwidth" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.coin,
+                                      expression: "coin"
+                                    }
+                                  ],
+                                  class: { "is-danger": _vm.errors.coin },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.coin = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "", selected: "" } },
+                                    [_vm._v("Choose")]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.coins, function(coin) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: coin.id,
+                                        domProps: { value: coin.identifier }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t    \t\t\t" +
+                                            _vm._s(coin.identifier) +
+                                            "\n\t\t\t\t\t\t\t\t\t    \t\t"
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm.errors.coin
+                            ? _c("p", { staticClass: "help is-danger" }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t  \t" +
+                                    _vm._s(_vm.errors.coin[0]) +
+                                    "\n\t\t\t\t\t\t\t\t\t  "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ]
                   )
                 ])
               ])
             ])
           ])
         ])
-      ])
-    ]),
-    _vm._v("\n\t" + _vm._s(_vm.index) + "\n\t"),
-    _c("p", { staticClass: "title is-4" }, [_vm._v("Recent transactions")]),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _vm._m(5)
-  ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "title is-4" }, [_vm._v("Wallets")]),
+      _vm._v(" "),
+      _vm._l(_vm.wallets, function(wallet) {
+        return _c("div", { key: wallet.id, staticClass: "card" }, [
+          _c("div", { staticClass: "card-content" }, [
+            _c("div", { staticClass: "media" }, [
+              _vm._m(4, true),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "media-content" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: { name: "wallet", params: { id: wallet.wallet_id } }
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "title is-4" }, [
+                        _vm._v(_vm._s(wallet.label))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "subtitle is-6" }, [
+                    _vm._v(_vm._s(wallet.coin))
+                  ])
+                ],
+                1
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      }),
+      _vm._v(" "),
+      _c("modal", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isModalVisible,
+            expression: "isModalVisible"
+          }
+        ],
+        on: { close: _vm.closeModal }
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -26300,6 +26635,193 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "block" }, [
+      _c(
+        "button",
+        {
+          staticClass: "button is-warning is-small",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Create wallet")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "media-left" }, [
+      _c("figure", { staticClass: "image is-48x48" }, [
+        _c("img", {
+          attrs: {
+            src: "https://bulma.io/images/placeholders/96x96.png",
+            alt: "Placeholder image"
+          }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("section", { staticClass: "hero is-primary" }, [
+        _c("div", { staticClass: "hero-body" }, [
+          _c("div", { staticClass: "container" }, [
+            _c("nav", { staticClass: "level" }, [
+              _c("div", { staticClass: "level-item has-text-centered" }, [
+                _c("div", [
+                  _c("p", { staticClass: "heading" }, [_vm._v("Balance")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "title" }, [
+                    _vm._v(_vm._s(_vm.wallet.balance))
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item has-text-centered" }, [
+                _c("div", [
+                  _c("p", { staticClass: "heading" }, [_vm._v("Coin")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "title" }, [
+                    _vm._v(_vm._s(_vm.wallet.coin))
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item has-text-centered" }, [
+                _c("div", [
+                  _c("p", { staticClass: "heading" }, [_vm._v("Address")]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "title is-6" }, [
+                    _vm._v(_vm._s(_vm.wallet.address))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "heading" }, [
+                    _vm._v("copy this address to recieve coins")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "level-item has-text-centered" }, [
+                _c("div", [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "block" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button is-danger is-small",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.submit($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Send")]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "title is-4" }, [_vm._v("Recent transactions")]),
+      _vm._v(" "),
+      _vm._l(_vm.transfers, function(transfer) {
+        return _c("div", { key: transfer.id, staticClass: "card" }, [
+          _c("div", { staticClass: "card-content" }, [
+            _c("div", { staticClass: "media" }, [
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "media-content" }, [
+                _c("p", [
+                  _c("strong", [_vm._v("$ " + _vm._s(transfer.usd))]),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(_vm._s(transfer.type))]),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(_vm._s(transfer.date))]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(
+                    "\n\t\t\t\t        " +
+                      _vm._s(transfer.label) +
+                      "\n\t\t\t    \t"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "subtitle is-6" }, [
+                  _vm._v(_vm._s(transfer.state))
+                ])
+              ])
+            ])
+          ])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "level" }, [
+      _c("p", { staticClass: "level-item has-text-centered" }, [
+        _c("a", { staticClass: "link is-info" }, [_vm._v("Home")])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "level-item has-text-centered" }, [
+        _c("a", { staticClass: "link is-info" }, [_vm._v("Menu")])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "level-item has-text-centered" }, [
+        _c("img", {
+          staticStyle: { height: "30px" },
+          attrs: { src: "https://bulma.io/images/bulma-type.png", alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "level-item has-text-centered" }, [
+        _c("a", { staticClass: "link is-info" }, [_vm._v("Reservations")])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "level-item has-text-centered" }, [
+        _c("a", { staticClass: "link is-info" }, [_vm._v("Contact")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block" }, [
       _c("button", { staticClass: "button is-success is-small" }, [
         _vm._v("Deposit")
       ])
@@ -26309,42 +26831,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-content" }, [
-        _c("div", { staticClass: "media" }, [
-          _c("div", { staticClass: "media-left" }, [
-            _c("figure", { staticClass: "image is-48x48" }, [
-              _c("img", {
-                attrs: {
-                  src: "https://bulma.io/images/placeholders/96x96.png",
-                  alt: "Placeholder image"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-content" }, [
-            _c("p", { staticClass: "title is-4" }, [_vm._v("John Smith")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "subtitle is-6" }, [_vm._v("@johnsmith")])
-          ])
-        ])
+    return _c("div", { staticClass: "media-left" }, [
+      _c("figure", { staticClass: "image is-48x48" }, [
+        _c("img", {
+          attrs: {
+            src: "https://bulma.io/images/placeholders/96x96.png",
+            alt: "Placeholder image"
+          }
+        })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal" }, [
-      _c("div", { staticClass: "modal-background" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "modal-content" }),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "modal-close is-large",
-        attrs: { "aria-label": "close" }
-      })
     ])
   }
 ]
@@ -26410,6 +26905,66 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal",
+        attrs: {
+          role: "dialog",
+          "aria-labelledby": "modalTitle",
+          "aria-describedby": "modalDescription"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-background" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "modal-content" },
+          [
+            _vm._t("header"),
+            _vm._v(" "),
+            _vm._t("body", [_vm._v("\n\t  \t\tI am a default body\n\t  \t")]),
+            _vm._v(" "),
+            _vm._t("footer", [
+              _vm._v("\n\t  \t\ti am a default footer\n\t  \t\t"),
+              _c("button", { staticClass: "close is-small" })
+            ])
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("button", {
+          staticClass: "modal-close is-large",
+          attrs: { "aria-label": "close" }
+        })
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44808,20 +45363,92 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/app/portfolio/components/Wallet.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/app/portfolio/components/Wallet.vue ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Wallet.vue?vue&type=template&id=3f1f2aa2& */ "./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2&");
+/* harmony import */ var _Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Wallet.vue?vue&type=script&lang=js& */ "./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/portfolio/components/Wallet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Wallet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/portfolio/components/Wallet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Wallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Wallet.vue?vue&type=template&id=3f1f2aa2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/portfolio/components/Wallet.vue?vue&type=template&id=3f1f2aa2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Wallet_vue_vue_type_template_id_3f1f2aa2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app/portfolio/components/index.js":
 /*!********************************************************!*\
   !*** ./resources/js/app/portfolio/components/index.js ***!
   \********************************************************/
-/*! exports provided: PortfolioIndex */
+/*! exports provided: PortfolioIndex, Wallet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PortfolioIndex", function() { return PortfolioIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Wallet", function() { return Wallet; });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var PortfolioIndex = vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('portfolio-index', __webpack_require__(/*! ./PortfolioIndex.vue */ "./resources/js/app/portfolio/components/PortfolioIndex.vue")["default"]);
+var Wallet = vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('wallet', __webpack_require__(/*! ./Wallet.vue */ "./resources/js/app/portfolio/components/Wallet.vue")["default"]);
 
 /***/ }),
 
@@ -44843,6 +45470,13 @@ __webpack_require__.r(__webpack_exports__);
   meta: {
     needsAuth: true
   }
+}, {
+  path: '/wallet/:id',
+  name: 'wallet',
+  component: _components__WEBPACK_IMPORTED_MODULE_0__["Wallet"],
+  meta: {
+    needsAuth: true
+  }
 }]);
 
 /***/ }),
@@ -44851,10 +45485,69 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/app/portfolio/vuex/actions.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: getCoins, getWallets, getAWallet, getTransfers, createWalllet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCoins", function() { return getCoins; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getWallets", function() { return getWallets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAWallet", function() { return getAWallet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransfers", function() { return getTransfers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWalllet", function() { return createWalllet; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
+var getCoins = function getCoins(_ref) {
+  var commit = _ref.commit,
+      dispatch = _ref.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/portfolio/getcoins').then(function (response) {
+    commit('setCoins', response.data.data);
+  })["catch"](function (error) {
+    console.log(error.response.data.error);
+  });
+};
+var getWallets = function getWallets(_ref2) {
+  var commit = _ref2.commit,
+      dispatch = _ref2.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/portfolio/allwallets').then(function (response) {
+    commit('setWallets', response.data.data);
+  })["catch"](function (error) {
+    console.log(error.response.data.error);
+  });
+};
+var getAWallet = function getAWallet(_ref3, id) {
+  var commit = _ref3.commit,
+      dispatch = _ref3.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/portfolio/".concat(id)).then(function (response) {
+    commit('setWallet', response.data.meta.wallet);
+  })["catch"](function (error) {
+    console.log(error.response.data.error);
+  });
+};
+var getTransfers = function getTransfers(_ref4, id) {
+  var commit = _ref4.commit,
+      dispatch = _ref4.dispatch;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/portfolio/gettransfers/".concat(id)).then(function (response) {
+    commit('setTransfers', response.data.meta.transfers);
+  })["catch"](function (error) {
+    console.log(error.response.data.error);
+  });
+};
+var createWalllet = function createWalllet(_ref5, _ref6) {
+  var commit = _ref5.commit,
+      dispatch = _ref5.dispatch;
+  var payload = _ref6.payload,
+      context = _ref6.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/portfolio', payload).then(function (response) {
+    commit('setWallets', response.data.data.wallets);
+    dispatch('flashMessage', response.data.meta.success, {
+      root: true
+    });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
 
 /***/ }),
 
@@ -44862,10 +45555,27 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/app/portfolio/vuex/getters.js ***!
   \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: coins, wallets, transfers, wallet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coins", function() { return coins; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wallets", function() { return wallets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transfers", function() { return transfers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wallet", function() { return wallet; });
+var coins = function coins(state) {
+  return state.coins;
+};
+var wallets = function wallets(state) {
+  return state.wallets;
+};
+var transfers = function transfers(state) {
+  return state.transfers;
+};
+var wallet = function wallet(state) {
+  return state.wallet;
+};
 
 /***/ }),
 
@@ -44879,20 +45589,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./resources/js/app/portfolio/vuex/state.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_state__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mutations */ "./resources/js/app/portfolio/vuex/mutations.js");
-/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mutations__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./resources/js/app/portfolio/vuex/actions.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getters */ "./resources/js/app/portfolio/vuex/getters.js");
-/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_getters__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
-  state: _state__WEBPACK_IMPORTED_MODULE_0___default.a,
+  state: _state__WEBPACK_IMPORTED_MODULE_0__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_1__,
   actions: _actions__WEBPACK_IMPORTED_MODULE_2__,
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__
@@ -44904,10 +45610,27 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/app/portfolio/vuex/mutations.js ***!
   \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: setCoins, setWallets, setTransfers, setWallet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCoins", function() { return setCoins; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setWallets", function() { return setWallets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setTransfers", function() { return setTransfers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setWallet", function() { return setWallet; });
+var setCoins = function setCoins(state, data) {
+  state.coins = data;
+};
+var setWallets = function setWallets(state, data) {
+  state.wallets = data;
+};
+var setTransfers = function setTransfers(state, data) {
+  state.transfers = data;
+};
+var setWallet = function setWallet(state, data) {
+  state.wallet = data;
+};
 
 /***/ }),
 
@@ -44915,10 +45638,17 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/portfolio/vuex/state.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  coins: [],
+  wallets: [],
+  transfers: [],
+  wallet: null
+});
 
 /***/ }),
 
@@ -45127,6 +45857,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Modal.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Modal.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Modal.vue?vue&type=template&id=53ab54d2& */ "./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2&");
+/* harmony import */ var _Modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.vue?vue&type=script&lang=js& */ "./resources/js/components/Modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Modal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Modal.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Modal.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Modal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Modal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Modal.vue?vue&type=template&id=53ab54d2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Modal.vue?vue&type=template&id=53ab54d2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_53ab54d2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

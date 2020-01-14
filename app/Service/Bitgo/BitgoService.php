@@ -3,8 +3,10 @@
 namespace App\Service\Bitgo;
 
 use App\Models\User;
-use GuzzleHttp\Client;
+use App\Models\Wallet;
 use Exception;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class BitgoService
 {
@@ -18,15 +20,15 @@ class BitgoService
 		$this->client = $client;
 	}
 
-	public function createWallet(User $user)
+	public function createWallet(Request $request, Wallet $wallet)
 	{
 		try {
 			$response = $this->client->request(
-				'POST', $this->expressUrl . '/tltc/wallet/generate', [
+				'POST', $this->expressUrl . "/{$request->coin}/wallet/generate", [
 					'headers' => $this->getBitgoHeaders(),
 					'json' => [
-						'label' => 'somewalletlabel',
-						'passphrase' => 'somesuperlongphraseforthewallet'
+						'label' => "{$wallet->label}",
+						'passphrase' => "{$wallet->passphrase}"
 					]
 				]
 			);
@@ -54,11 +56,11 @@ class BitgoService
 		return json_decode($response->getBody(), false);
 	}
 
-	public function allTransactions()
+	public function allTransactions(Request $request, Wallet $wallet)
 	{
 		try {
 			$response = $this->client->request(
-				'GET', $this->expressUrl . '/tltc/wallet/5e175d6f8e90d31c06b1c143ef97bd34/transfer', [
+				'GET', $this->expressUrl . "/{$wallet->coin}/wallet/{$wallet->wallet_id}/transfer", [
 					'headers' => $this->getBitgoHeaders()
 				]
 			);
@@ -70,6 +72,22 @@ class BitgoService
 		return json_decode($response->getBody(), false);
 	}
 
+
+	public function getWallet(Request $request, Wallet $wallet)
+	{
+		try {
+			$response = $this->client->request(
+				'GET', $this->expressUrl . "/{$wallet->coin}/wallet/{$wallet->wallet_id}", [
+					'headers' => $this->getBitgoHeaders()
+				]
+			);
+			
+		} catch (Exception $e) {
+			dd($e->getMessage());
+		}
+
+		return json_decode($response->getBody(), false);
+	}
 
 	public function checkBalance()
 	{

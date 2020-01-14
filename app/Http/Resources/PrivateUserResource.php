@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\WalletResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PrivateUserResource extends JsonResource
@@ -20,6 +21,7 @@ class PrivateUserResource extends JsonResource
             'email' =>$this->email,
             'twoFaVerified' => $this->twoFactorPendingVerification(),
             'twoFaEnabled' => $this->twoFactorEnabled(),
+            'wallets' => WalletResource::collection($this->wallets)
         ];
     }
 }
