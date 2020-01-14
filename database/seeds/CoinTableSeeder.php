@@ -13,13 +13,6 @@ class CoinTableSeeder extends Seeder
     public function run()
     {
         $coins = [
-        	[
-        		'identifier' => 'teth'
-        	],
-
-        	[
-        		'identifier' => 'tltc'
-        	],
 
         	[
         		'identifier' => 'tltc'

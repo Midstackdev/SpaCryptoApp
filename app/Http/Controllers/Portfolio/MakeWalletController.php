@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Portfolio;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Portfolio\SendCoinRequest;
 use App\Http\Requests\Portfolio\WalletStoreRequest;
 use App\Http\Resources\PrivateUserResource;
 use App\Models\Wallet;
@@ -77,7 +78,6 @@ class MakeWalletController extends Controller
     	if ($response = $bitgo->allTransactions($request, $wallet)) {
     		$transfers = $response->transfers;
     	}
-    	// dd($response->transfers);
 
     	return (new PrivateUserResource($user))->additional([
     		'meta' => [
@@ -87,9 +87,11 @@ class MakeWalletController extends Controller
     	]);
     }
 
-    public function send(Request $request, BitgoService $bitgo)
+    public function send(SendCoinRequest $request, BitgoService $bitgo, Wallet $wallet)
     {
-    	$response = $bitgo->sendMoney($request->user());
+    	$user = $request->user();
+    	// $response = $bitgo->unlock();
+    	$response = $bitgo->sendMoney($request, $wallet);
     	dd($response);
     }
 }

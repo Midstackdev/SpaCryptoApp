@@ -51,7 +51,7 @@ Route::group(['prefix' => 'portfolio', 'middleware' => ['auth:api'], 'namespace'
 	Route::post('/', 'MakeWalletController@store');
 	Route::get('getwallets', 'MakeWalletController@getWallets');
 	Route::get('gettransfers/{wallet}', 'MakeWalletController@transactions');
-	Route::post('sendtransfer', 'MakeWalletController@send');
+	Route::post('sendtransfer/{wallet}', 'MakeWalletController@send');
 	Route::post('address', 'MakeWalletController@makeAddress');
 	
 	Route::get('getcoins', 'CoinsController@index');

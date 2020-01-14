@@ -45,3 +45,13 @@ export const createWalllet = ( {commit, dispatch } , { payload, context }) => {
 		context.errors = error.response.data.errors
 	}) 
 }
+
+export const sendCoins = ( {commit, dispatch } , { id, payload, context }) => {
+
+	return axios.post(`/api/portfolio/sendtransfer/${id}`, payload).then((response) => {
+		// commit('setWallets', response.data.data.wallets)
+		// dispatch('flashMessage', response.data.meta.success, {root: true})
+	}).catch((error) => {
+		context.errors = error.response.data.errors
+	}) 
+}

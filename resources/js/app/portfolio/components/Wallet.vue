@@ -42,12 +42,31 @@
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
-							<div class="block">
-								<button class="button is-success is-small">Deposit</button>
-							</div>
-							<div class="block">
-								<button class="button is-danger is-small" @click.prevent="submit">Send</button>
-							</div>
+							<form @submit.prevent="submit">
+								<div class="block">
+									<div class="field">
+									  <label class="label">Address</label>
+									  <div class="control">
+									    <input class="input" type="text" v-model="address" :class="{ 'is-danger' : errors.address }">
+									  </div>
+									  <p class="help is-danger" v-if="errors.address">
+									  	{{ errors.address[0] }}
+									  </p>
+									</div>
+									<div class="field">
+									  <label class="label">Amount</label>
+									  <div class="control">
+									    <input class="input" type="text" v-model="amount" :class="{ 'is-danger' : errors.amount }">
+									  </div>
+									  <p class="help is-danger" v-if="errors.amount">
+									  	{{ errors.amount[0] }}
+									  </p>
+									</div>
+								</div>
+								<div class="block">
+									<button type="submit" class="button is-warning is-small">Send coins</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</nav>
@@ -74,6 +93,7 @@
 					</div>
 				</div>
 			</div>
+			<hr>
 		</div>
 	</div>
 </template>
@@ -84,7 +104,9 @@
 	export default {
 		data () {
 			return {
-
+				address: null,
+				amount: null,
+				errors: []
 			}
 		},
 
@@ -98,8 +120,25 @@
 		methods: {
 			...mapActions({
 				getAWallet: 'portfolio/getAWallet',
-				getTransfers: 'portfolio/getTransfers'
-			})
+				getTransfers: 'portfolio/getTransfers',
+				sendCoins: 'portfolio/sendCoins'
+			}),
+
+			submit () {
+				this.sendCoins({
+					payload: {
+						address: this.address,
+						amount: this.amount,
+					},
+
+					context: this,
+
+					id: this.$route.params.id
+				}).then(() => {
+					this.address = null
+					this.amount = null
+				})
+			}
 		},
 
 		mounted () {

@@ -89,9 +89,23 @@ class BitgoService
 		return json_decode($response->getBody(), false);
 	}
 
-	public function checkBalance()
+	public function unlock()
 	{
-		
+		try {
+			$response = $this->client->request(
+				'POST', $this->expressUrl . "/user/unlock", [
+					'headers' => $this->getBitgoHeaders(),
+					'json' => [
+						'otp' => "0000000",
+					]
+				]
+			);
+			
+		} catch (Exception $e) {
+			dd($e->getMessage());
+		}
+
+		return json_decode($response->getBody(), false);
 	}
 
 	public function createWalletAddress()
@@ -113,16 +127,16 @@ class BitgoService
 		return json_decode($response->getBody(), false);
 	}
 
-	public function sendMoney()
+	public function sendMoney(Request $request, Wallet $wallet)
 	{
 		try {
 			$response = $this->client->request(
-				'POST', $this->expressUrl . '/tltc/wallet/5e175d6f8e90d31c06b1c143ef97bd34/sendcoins', [
+				'POST', $this->expressUrl . "/{$wallet->coin}/wallet/{$wallet->wallet_id}/sendcoins", [
 					'headers' => $this->getBitgoHeaders(),
 					'json' => [
-						'amount' => 0.01 * 1e8,
-						'address' => 'QQwosoDasHs7RDYfXDaMXHtup2hszEPCFn',
-						'walletPassphrase' => 'somesuperlongphraseforthewallet'
+						'amount' => $request->amount * 1e8,
+						'address' => $request->address,
+						'walletPassphrase' => $wallet->passphrase
 					]
 				]
 			);

@@ -3183,10 +3183,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      address: null,
+      amount: null,
+      errors: []
+    };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     wallet: 'portfolio/wallet',
@@ -3194,8 +3218,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     getAWallet: 'portfolio/getAWallet',
-    getTransfers: 'portfolio/getTransfers'
-  })),
+    getTransfers: 'portfolio/getTransfers',
+    sendCoins: 'portfolio/sendCoins'
+  }), {
+    submit: function submit() {
+      var _this = this;
+
+      this.sendCoins({
+        payload: {
+          address: this.address,
+          amount: this.amount
+        },
+        context: this,
+        id: this.$route.params.id
+      }).then(function () {
+        _this.address = null;
+        _this.amount = null;
+      });
+    }
+  }),
   mounted: function mounted() {
     this.getAWallet(this.$route.params.id);
     this.getTransfers(this.$route.params.id);
@@ -26727,23 +26768,104 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "level-item has-text-centered" }, [
                 _c("div", [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "block" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "button is-danger is-small",
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.submit($event)
-                          }
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.submit($event)
                         }
-                      },
-                      [_vm._v("Send")]
-                    )
-                  ])
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "block" }, [
+                        _c("div", { staticClass: "field" }, [
+                          _c("label", { staticClass: "label" }, [
+                            _vm._v("Address")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "control" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.address,
+                                  expression: "address"
+                                }
+                              ],
+                              staticClass: "input",
+                              class: { "is-danger": _vm.errors.address },
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.address },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.address = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.errors.address
+                            ? _c("p", { staticClass: "help is-danger" }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t  \t" +
+                                    _vm._s(_vm.errors.address[0]) +
+                                    "\n\t\t\t\t\t\t\t\t  "
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "field" }, [
+                          _c("label", { staticClass: "label" }, [
+                            _vm._v("Amount")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "control" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.amount,
+                                  expression: "amount"
+                                }
+                              ],
+                              staticClass: "input",
+                              class: { "is-danger": _vm.errors.amount },
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.amount },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.amount = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.errors.amount
+                            ? _c("p", { staticClass: "help is-danger" }, [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t  \t" +
+                                    _vm._s(_vm.errors.amount[0]) +
+                                    "\n\t\t\t\t\t\t\t\t  "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]
+                  )
                 ])
               ])
             ])
@@ -26780,7 +26902,9 @@ var render = function() {
                 ])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("hr")
         ])
       })
     ],
@@ -26822,9 +26946,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "block" }, [
-      _c("button", { staticClass: "button is-success is-small" }, [
-        _vm._v("Deposit")
-      ])
+      _c(
+        "button",
+        {
+          staticClass: "button is-warning is-small",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Send coins")]
+      )
     ])
   },
   function() {
@@ -45485,7 +45614,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/app/portfolio/vuex/actions.js ***!
   \****************************************************/
-/*! exports provided: getCoins, getWallets, getAWallet, getTransfers, createWalllet */
+/*! exports provided: getCoins, getWallets, getAWallet, getTransfers, createWalllet, sendCoins */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45495,6 +45624,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAWallet", function() { return getAWallet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransfers", function() { return getTransfers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWalllet", function() { return createWalllet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sendCoins", function() { return sendCoins; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -45544,6 +45674,18 @@ var createWalllet = function createWalllet(_ref5, _ref6) {
     dispatch('flashMessage', response.data.meta.success, {
       root: true
     });
+  })["catch"](function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
+var sendCoins = function sendCoins(_ref7, _ref8) {
+  var commit = _ref7.commit,
+      dispatch = _ref7.dispatch;
+  var id = _ref8.id,
+      payload = _ref8.payload,
+      context = _ref8.context;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/portfolio/sendtransfer/".concat(id), payload).then(function (response) {// commit('setWallets', response.data.data.wallets)
+    // dispatch('flashMessage', response.data.meta.success, {root: true})
   })["catch"](function (error) {
     context.errors = error.response.data.errors;
   });
