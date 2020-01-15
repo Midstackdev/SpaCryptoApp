@@ -56,6 +56,7 @@ Route::group(['prefix' => 'portfolio', 'middleware' => ['auth:api'], 'namespace'
 	
 	Route::get('getcoins', 'CoinsController@index');
 	Route::get('allwallets', 'WalletController@index');
+	Route::get('unlock', 'MakeWalletController@unlock');
 	Route::get('/{wallet}', 'MakeWalletController@getAWallet');
 });
 

@@ -19,9 +19,9 @@ class MakeWalletController extends Controller
     {
     	$user = $request->user();
     	$wallet = $user->wallets()->create([
-    		'label' => $request->coin .' '. $this->label . $user->id,
-    		'passphrase' => $request->coin . $this->passphrase . $user->id,
-    		'coin' => $request->coin
+    		'label' => $request->label,
+    		'passphrase' => $request->passphrase,
+    		'coin' => $request->coin,
     	]);
 
     	$walletId = $wallet->id;
@@ -87,11 +87,26 @@ class MakeWalletController extends Controller
     	]);
     }
 
+    public function unlock(Request $request, BitgoService $bitgo, Wallet $wallet)
+    {
+    	$user = $request->user();
+    	$response = $bitgo->unlock();
+    	// dd($response->session->client);
+    }
+
     public function send(SendCoinRequest $request, BitgoService $bitgo, Wallet $wallet)
     {
     	$user = $request->user();
-    	// $response = $bitgo->unlock();
-    	$response = $bitgo->sendMoney($request, $wallet);
-    	dd($response);
+    	if ($response = $bitgo->sendMoney($request, $wallet)) {
+    		$transfer = $response->transfer;
+    	}
+
+    	return (new PrivateUserResource($user))->additional([
+    		'meta' => [
+    			'status' => 200,
+    			'transfer' => $transfer,
+    			'success' => 'tranfer was successfully.'
+    		]
+    	]);
     }
 }

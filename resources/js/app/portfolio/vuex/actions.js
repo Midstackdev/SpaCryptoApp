@@ -36,6 +36,15 @@ export const getTransfers = ({ commit, dispatch }, id ) => {
 	})
 }
 
+export const unlock = ({ commit, dispatch }) => {
+
+	return axios.get(`/api/portfolio/unlock`).then((response) => {
+		// commit('setTransfers', response.data.meta.transfers)
+	}).catch((error) => {
+		console.log(error.response.data.error)
+	})
+}
+
 export const createWalllet = ( {commit, dispatch } , { payload, context }) => {
 
 	return axios.post('/api/portfolio', payload).then((response) => {
@@ -49,8 +58,8 @@ export const createWalllet = ( {commit, dispatch } , { payload, context }) => {
 export const sendCoins = ( {commit, dispatch } , { id, payload, context }) => {
 
 	return axios.post(`/api/portfolio/sendtransfer/${id}`, payload).then((response) => {
-		// commit('setWallets', response.data.data.wallets)
-		// dispatch('flashMessage', response.data.meta.success, {root: true})
+		commit('setNewTransfer', response.data.meta.transfer)
+		dispatch('flashMessage', response.data.meta.success, {root: true})
 	}).catch((error) => {
 		context.errors = error.response.data.errors
 	}) 

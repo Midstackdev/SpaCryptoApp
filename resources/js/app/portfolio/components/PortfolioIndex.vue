@@ -3,75 +3,77 @@
 		<section class="hero is-primary">
 			<div class="hero-body">
 				<div class="container">
-					<nav class="level">
-						<div class="level-item has-text-centered">
-							<div>
-								<p class="heading">BTC</p>
-								<p class="title">3,456</p>
-							</div>
-						</div>
-						<div class="level-item has-text-centered">
-							<div>
-								<p class="heading">ETH</p>
-								<p class="title">123</p>
-							</div>
-						</div>
-						<div class="level-item has-text-centered">
-							<div>
-								<p class="heading">Followers</p>
-								<p class="title">456K</p>
-							</div>
-						</div>
-
-						<div class="level-item has-text-centered">
-							<div>
-								<form @submit.prevent="submit">
-									<div class="block">
-										<div class="field">
-										  <label class="label">Coin</label>
-										  <div class="control is-expanded">
-										  	 <div class="select is-fullwidth">
-											    <select :class="{ 'is-danger' : errors.coin }" v-model="coin">
-											    	<option value="" selected>Choose</option>
-										    		<option :value="coin.identifier" v-for="coin in coins" :key="coin.id">
-										    			{{ coin.identifier }}
-										    		</option>
-											    </select>
-											</div>
-										  </div>
-										  <p class="help is-danger" v-if="errors.coin">
-										  	{{ errors.coin[0] }}
-										  </p>
-										</div>
+					<form @submit.prevent="submit">
+						<div class="field is-horizontal">
+							<div class="field-body">
+								<div class="field">
+								  <label class="label">Label</label>
+								  <div class="control">
+								    <input class="input" type="text" v-model="label" :class="{ 'is-danger' : errors.label }" placeholder="Your wallet description">
+								  </div>
+								  <p class="help is-danger" v-if="errors.label">
+								  	{{ errors.label[0] }}
+								  </p>
+								</div>
+								<div class="field">
+								  <label class="label">Passphrase</label>
+								  <div class="control">
+								    <input class="input" type="text" v-model="passphrase" :class="{ 'is-danger' : errors.passphrase }" placeholder="Longer passphrase to encrypt your wallet">
+								  </div>
+								  <p class="help is-danger" v-if="errors.passphrase">
+								  	{{ errors.passphrase[0] }}
+								  </p>
+								</div>
+								<div class="field">
+								  <label class="label">Coin</label>
+								  <div class="control is-expanded">
+								  	 <div class="select is-fullwidth">
+									    <select :class="{ 'is-danger' : errors.coin }" v-model="coin">
+									    	<option value="" selected>Choose</option>
+								    		<option :value="coin.identifier" v-for="coin in coins" :key="coin.id">
+								    			{{ coin.identifier }}
+								    		</option>
+									    </select>
 									</div>
-									<div class="block">
-										<button type="submit" class="button is-warning is-small">Create wallet</button>
+								  </div>
+								  <p class="help is-danger" v-if="errors.coin">
+								  	{{ errors.coin[0] }}
+								  </p>
+								</div>
+								<div class="field">
+									<div class="control">
+										<button type="submit" class="button is-warning">Create wallet</button>
 									</div>
-								</form>
+								</div>
 							</div>
 						</div>
-					</nav>
+					</form>
 				</div>
 			</div>
 		</section>
 
 		<p class="title is-4">Wallets</p>
-		<div class="card" v-for="wallet in wallets" :key="wallet.id">
-			<div class="card-content">
-				<div class="media">
-					<div class="media-left">
-						<figure class="image is-48x48">
-							<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-						</figure>
-					</div>
-					<div class="media-content">
-						<router-link :to="{ name: 'wallet', params: { id: wallet.wallet_id} }"><p class="title is-4">{{ wallet.label }}</p></router-link>
-						<p class="subtitle is-6">{{ wallet.coin }}</p>
+		<template v-if="wallets">			
+			<div class="card" v-for="wallet in wallets" :key="wallet.id">
+				<div class="card-content">
+					<div class="media">
+						<div class="media-left">
+							<figure class="image is-48x48">
+								<img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="media-content">
+							<router-link :to="{ name: 'wallet', params: { id: wallet.wallet_id} }"><p class="title is-4">{{ wallet.label }}</p></router-link>
+							<p class="subtitle is-6">{{ wallet.coin }}</p>
+						</div>
 					</div>
 				</div>
+			<hr>
 			</div>
-		<hr>
-		</div>
+		</template>
+		<template v-else>
+			<p>Create a wallet</p>
+		</template>
 		<modal
 		v-show="isModalVisible"
 		@close="closeModal"
@@ -92,6 +94,8 @@
 			return {
 				isModalVisible: false,
 				coin: '',
+				label: null,
+				passphrase: null,
 				errors: []
 			}
 		},
@@ -113,12 +117,16 @@
 			submit () {
 				this.createWalllet({
 					payload: {
-						coin: this.coin
+						coin: this.coin,
+						label: this.label,
+						passphrase: this.passphrase
 					},
 
 					context: this
 				}).then(() => {
 					this.coin = ''
+					this.label = null
+					this.passphrase = null
 				})
 			},
 

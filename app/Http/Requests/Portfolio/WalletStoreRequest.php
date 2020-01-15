@@ -24,7 +24,9 @@ class WalletStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'coin' => 'required|exists:coins,identifier'
+            'coin' => 'required|exists:coins,identifier',
+            'label' => 'required|string',
+            'passphrase' => 'required|string|min:15',
         ];
     }
 }

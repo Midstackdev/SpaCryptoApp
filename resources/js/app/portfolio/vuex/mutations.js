@@ -10,6 +10,10 @@ export const setTransfers = (state, data) => {
 	state.transfers = data
 }
 
+export const setNewTransfer = (state, data) => {
+	state.transfers.unshift(data)
+}
+
 export const setWallet = (state, data) => {
 	state.wallet = data
 }

@@ -47,7 +47,7 @@
 									<div class="field">
 									  <label class="label">Address</label>
 									  <div class="control">
-									    <input class="input" type="text" v-model="address" :class="{ 'is-danger' : errors.address }">
+									    <input class="input" type="text" v-model="address" :class="{ 'is-danger' : errors.address }" placeholder="Enter destination addres">
 									  </div>
 									  <p class="help is-danger" v-if="errors.address">
 									  	{{ errors.address[0] }}
@@ -56,7 +56,7 @@
 									<div class="field">
 									  <label class="label">Amount</label>
 									  <div class="control">
-									    <input class="input" type="text" v-model="amount" :class="{ 'is-danger' : errors.amount }">
+									    <input class="input" type="text" v-model="amount" :class="{ 'is-danger' : errors.amount }" placeholder="Enter amont">
 									  </div>
 									  <p class="help is-danger" v-if="errors.amount">
 									  	{{ errors.amount[0] }}
@@ -121,7 +121,8 @@
 			...mapActions({
 				getAWallet: 'portfolio/getAWallet',
 				getTransfers: 'portfolio/getTransfers',
-				sendCoins: 'portfolio/sendCoins'
+				sendCoins: 'portfolio/sendCoins',
+				unlock: 'portfolio/unlock'
 			}),
 
 			submit () {
@@ -144,6 +145,7 @@
 		mounted () {
 			this.getAWallet(this.$route.params.id)
 			this.getTransfers(this.$route.params.id)
+			this.unlock()
 		}
 	}
 	
