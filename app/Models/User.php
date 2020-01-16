@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Traits\{HasConfirmationToken, HasTwoFactorAuthentication, HasWallets };
+use App\Models\Traits\{HasConfirmationToken, HasTwoFactorAuthentication, HasWallets, HasRoles };
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +11,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, HasConfirmationToken, SoftDeletes, HasTwoFactorAuthentication, HasWallets;
+    use Notifiable, HasConfirmationToken, SoftDeletes, HasTwoFactorAuthentication, HasWallets, HasRoles;
 
     /**
      * The attributes that are mass assignable.

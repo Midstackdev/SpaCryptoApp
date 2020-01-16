@@ -21,6 +21,7 @@ class PrivateUserResource extends JsonResource
             'email' =>$this->email,
             'twoFaVerified' => $this->twoFactorPendingVerification(),
             'twoFaEnabled' => $this->twoFactorEnabled(),
+            'is_admin' => $this->hasRole('admin'),
             'wallets' => WalletResource::collection($this->wallets)
         ];
     }

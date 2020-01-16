@@ -136,8 +136,44 @@ class BitgoService
 					'json' => [
 						'amount' => $request->amount * 1e8,
 						'address' => $request->address,
-						'walletPassphrase' => $wallet->passphrase
+						'walletPassphrase' => md5($wallet->passphrase)
 					]
+				]
+			);
+			
+		} catch (Exception $e) {
+			dd($e->getMessage());
+		}
+
+		return json_decode($response->getBody(), false);
+	}
+
+	public function tranfers(Request $request)
+	{
+		try {
+			$response = $this->client->request(
+				'GET', $this->expressUrl . "/{$request->coin}/transfer", [
+					'headers' => $this->getBitgoHeaders(),
+					'query' => [
+						'enterpriseId' => '5e1046f11f88b332061c504efb7d7f41',
+						'height' => 2000,
+					]
+				]
+			);
+			
+		} catch (Exception $e) {
+			dd($e->getMessage());
+		}
+
+		return json_decode($response->getBody(), false);
+	}
+
+	public function user()
+	{
+		try {
+			$response = $this->client->request(
+				'GET', $this->expressUrl . "/user/me", [
+					'headers' => $this->getBitgoHeaders(),
 				]
 			);
 			

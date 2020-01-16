@@ -1,21 +1,7 @@
 <template>
 	<div>
 		<nav class="level">
-		  <p class="level-item has-text-centered">
-		    <a class="link is-info">Home</a>
-		  </p>
-		  <p class="level-item has-text-centered">
-		    <a class="link is-info">Menu</a>
-		  </p>
-		  <p class="level-item has-text-centered">
-		    <img src="https://bulma.io/images/bulma-type.png" alt="" style="height: 30px;">
-		  </p>
-		  <p class="level-item has-text-centered">
-		    <a class="link is-info">Reservations</a>
-		  </p>
-		  <p class="level-item has-text-centered">
-		    <a class="link is-info">Contact</a>
-		  </p>
+		  
 		</nav>
 		<section class="hero is-primary">
 		  <div class="hero-body">

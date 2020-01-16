@@ -36,18 +36,35 @@
 				          <router-link :to="{ name: 'portfolio.index'}" class="navbar-item">
 				            Account
 				          </router-link>
-				          <a class="navbar-item">
-				            All transactions
-				          </a>
-				          <a class="navbar-item">
-				            Contact
-				          </a>
 				          <hr class="navbar-divider">
 				          <a class="navbar-item">
 				            Report an issue
 				          </a>
 				        </div>
 				      </div>
+				      <template v-if="user.data.is_admin">
+					      <div class="navbar-item has-dropdown is-hoverable">
+					        <a class="navbar-link">
+					          Admin
+					        </a>
+
+					        <div class="navbar-dropdown">
+					          <router-link :to="{ name: 'admin'}" class="navbar-item">
+					            Dashboard
+					          </router-link>
+					          <router-link :to="{ name: 'admin.transactions' }" class="navbar-item">
+					            All transactions
+					          </router-link>
+					          <a class="navbar-item">
+					            Contact
+					          </a>
+					          <hr class="navbar-divider">
+					          <a class="navbar-item">
+					            Report an issue
+					          </a>
+					        </div>
+					      </div>
+					  </template>
 			    	<router-link :to="{ name: 'timeline' }" class="navbar-item">
 			    	  Timeline
 			    	</router-link>
