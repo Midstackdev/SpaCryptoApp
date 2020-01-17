@@ -11,8 +11,8 @@ class TransactionController extends Controller
     public function index(Request $request, BitgoService $bitgo)
     {
     	$user = $request->user();
-    	$response = $bitgo->user();
-    	// $response = $bitgo->tranfers($request);
+    	// $response = $bitgo->user();
+    	$response = $bitgo->tranfers($request);
     	dd($response);
     }
 }

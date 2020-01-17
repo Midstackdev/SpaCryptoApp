@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\{HasConfirmationToken, HasTwoFactorAuthentication, HasWallets, HasRoles };
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -69,4 +70,9 @@ class User extends Authenticatable implements JWTSubject
      {
         return !$this->hasActivated();
      }
+
+    public function hasNotDeactivated()
+    {
+        return $this->deleted_at == NULL;
+    }
 }

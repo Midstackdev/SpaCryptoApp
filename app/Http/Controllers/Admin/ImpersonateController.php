@@ -3,12 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Models\{User, Wallet};
 use Illuminate\Http\Request;
 
 class ImpersonateController extends Controller
 {
     public function index()
     {
-    	dd('you are in');
+    	$users = User::get();
+    	$usersCount = $users->count();
+    	$walletCount = Wallet::get()->count();
+
+    	return (UserResource::collection($users))->additional([
+    		'meta' => [
+    			'status' => 200,
+    			'stats' => [
+    				'users_count' => $usersCount,
+    				'wallet_count' => $walletCount,
+    			]	
+    		]
+    	]);
+    }
+
+    public function ipmersonate()
+    {
+    	return response()->json([
+    		'data' => 'Admin index'
+    	], 200);
     }
 }
