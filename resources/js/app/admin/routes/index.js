@@ -1,4 +1,4 @@
-import { Admin, Transactions } from '../components'
+import { Admin, Transactions, ViewWallet } from '../components'
 
 export default [
 	{
@@ -13,6 +13,14 @@ export default [
 		path: '/admin-tranfers',
 		name: 'admin.transactions',
 		component: Transactions,
+		meta: {
+			needsAuth: true
+		}
+	},
+	{
+		path: '/admin-wallet',
+		name: 'admin.wallet',
+		component: ViewWallet,
 		meta: {
 			needsAuth: true
 		}

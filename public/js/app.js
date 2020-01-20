@@ -2399,8 +2399,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     isAdmin: 'admin/isAdmin',
-    getUsers: 'admin/getUsers'
-  })),
+    getUsers: 'admin/getUsers',
+    getUser: 'admin/getUser'
+  }), {
+    view: function view(userId) {
+      this.getUser(userId).then(function () {// this.$router.push({ name: 'admin.wallet' })
+      });
+    }
+  }),
   mounted: function mounted() {
     this.isAdmin();
     this.getUsers();
@@ -2504,6 +2510,101 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.isAdmin();
     this.getCoins();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {// userId: this.user.id
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    user: 'admin/user'
+  })),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    isAdmin: 'admin/isAdmin',
+    getUser: 'admin/getUser'
+  })),
+  mounted: function mounted() {
+    this.isAdmin(); // this.getUser(userId)
   }
 });
 
@@ -25702,9 +25803,20 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [
                   _c("div", { staticClass: "buttons has-addons" }, [
-                    _c("button", { staticClass: "button is-small is-link" }, [
-                      _vm._v("View")
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "button is-small is-link",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.view(user.id)
+                          }
+                        }
+                      },
+                      [_vm._v("View")]
+                    ),
                     _vm._v(" "),
                     !user.active
                       ? _c(
@@ -25933,6 +26045,104 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", { staticClass: "level-item" }, [
         _c("a", { staticClass: "button is-success" }, [_vm._v("New")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("nav", { staticClass: "level" }),
+    _vm._v(" "),
+    _c("nav", { staticClass: "level" }, [
+      _c("div", { staticClass: "level-item has-text-centered" }, [
+        _c("div", [
+          _c("p", { staticClass: "heading" }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "title" }, [_vm._v(_vm._s(_vm.user.name))])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-item has-text-centered" }, [
+        _c("div", [
+          _c("p", { staticClass: "heading" }, [_vm._v("Wallets")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "title" }, [
+            _vm._v(_vm._s(_vm.user.wallet_count))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1)
+    ]),
+    _vm._v(" "),
+    _c("nav", { staticClass: "level" }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "tile is-ancestor" },
+      _vm._l(_vm.user.wallets, function(wallet, index) {
+        return _c("div", { key: wallet.id, staticClass: "tile is-parent" }, [
+          _c("article", { staticClass: "tile is-child box" }, [
+            _c("p", { staticClass: "title" }, [_vm._v(_vm._s(wallet.label))]),
+            _vm._v(" "),
+            _c("p", { staticClass: "subtitle" }, [
+              _vm._v("Coin: " + _vm._s(wallet.coin))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "subtitle" }, [
+              _vm._v("Balance: " + _vm._s(wallet.balance))
+            ])
+          ])
+        ])
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level-item has-text-centered" }, [
+      _c("div", [
+        _c("p", { staticClass: "heading" }, [_vm._v("Followers")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "title" }, [_vm._v("456K")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "level-item has-text-centered" }, [
+      _c("div", [
+        _c("p", { staticClass: "heading" }, [_vm._v("Likes")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "title" }, [_vm._v("789")])
       ])
     ])
   }
@@ -45136,22 +45346,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/app/admin/components/ViewWallet.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/app/admin/components/ViewWallet.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ViewWallet.vue?vue&type=template&id=6a16417b& */ "./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b&");
+/* harmony import */ var _ViewWallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewWallet.vue?vue&type=script&lang=js& */ "./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ViewWallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/app/admin/components/ViewWallet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewWallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ViewWallet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/admin/components/ViewWallet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewWallet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ViewWallet.vue?vue&type=template&id=6a16417b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/app/admin/components/ViewWallet.vue?vue&type=template&id=6a16417b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ViewWallet_vue_vue_type_template_id_6a16417b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app/admin/components/index.js":
 /*!****************************************************!*\
   !*** ./resources/js/app/admin/components/index.js ***!
   \****************************************************/
-/*! exports provided: Admin, Transactions */
+/*! exports provided: Admin, Transactions, ViewWallet */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin", function() { return Admin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transactions", function() { return Transactions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewWallet", function() { return ViewWallet; });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var Admin = vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin', __webpack_require__(/*! ./Admin.vue */ "./resources/js/app/admin/components/Admin.vue")["default"]);
 var Transactions = vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('transactions', __webpack_require__(/*! ./Transactions.vue */ "./resources/js/app/admin/components/Transactions.vue")["default"]);
+var ViewWallet = vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('view-wallet', __webpack_require__(/*! ./ViewWallet.vue */ "./resources/js/app/admin/components/ViewWallet.vue")["default"]);
 
 /***/ }),
 
@@ -45180,6 +45461,13 @@ __webpack_require__.r(__webpack_exports__);
   meta: {
     needsAuth: true
   }
+}, {
+  path: '/admin-wallet',
+  name: 'admin.wallet',
+  component: _components__WEBPACK_IMPORTED_MODULE_0__["ViewWallet"],
+  meta: {
+    needsAuth: true
+  }
 }]);
 
 /***/ }),
@@ -45188,13 +45476,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/app/admin/vuex/actions.js ***!
   \************************************************/
-/*! exports provided: isAdmin, getUsers, coinTransfers */
+/*! exports provided: isAdmin, getUsers, getUser, coinTransfers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAdmin", function() { return isAdmin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coinTransfers", function() { return coinTransfers; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -45222,10 +45511,20 @@ var getUsers = function getUsers(_ref2) {
     commit('setStats', response.data.meta.stats);
   })["catch"](function (error) {});
 };
-var coinTransfers = function coinTransfers(_ref3, _ref4) {
+var getUser = function getUser(_ref3, userId) {
   var commit = _ref3.commit,
       dispatch = _ref3.dispatch;
-  var payload = _ref4.payload;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/admin/getuser/".concat(userId)).then(function (response) {
+    commit('setUser', response.data.data);
+    _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+      name: 'admin.wallet'
+    });
+  })["catch"](function (error) {});
+};
+var coinTransfers = function coinTransfers(_ref4, _ref5) {
+  var commit = _ref4.commit,
+      dispatch = _ref4.dispatch;
+  var payload = _ref5.payload;
   return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/admin/transfers', payload).then(function (response) {
     console.log(response);
   })["catch"](function (error) {});
@@ -45237,15 +45536,19 @@ var coinTransfers = function coinTransfers(_ref3, _ref4) {
 /*!************************************************!*\
   !*** ./resources/js/app/admin/vuex/getters.js ***!
   \************************************************/
-/*! exports provided: users, stats */
+/*! exports provided: users, user, stats */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "users", function() { return users; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stats", function() { return stats; });
 var users = function users(state) {
   return state.users;
+};
+var user = function user(state) {
+  return state.user;
 };
 var stats = function stats(state) {
   return state.stats;
@@ -45284,15 +45587,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/app/admin/vuex/mutations.js ***!
   \**************************************************/
-/*! exports provided: setUsers, setStats */
+/*! exports provided: setUsers, setUser, setStats */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUsers", function() { return setUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUser", function() { return setUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setStats", function() { return setStats; });
 var setUsers = function setUsers(state, data) {
   state.users = data;
+};
+var setUser = function setUser(state, data) {
+  state.user = data;
 };
 var setStats = function setStats(state, data) {
   state.stats = data;
@@ -45311,7 +45618,8 @@ var setStats = function setStats(state, data) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   users: [],
-  stats: []
+  stats: [],
+  user: null
 });
 
 /***/ }),

@@ -41,6 +41,9 @@ class MakeWalletController extends Controller
     {
     	$user = $request->user();
     	if ($response = $bitgo->getWallet($request, $wallet)){
+            $wallet->update([
+                'balance' => $response->balance
+            ]);
     		$balance = $response->confirmedBalance;
     		$address = $response->receiveAddress->address;
     		$coin = $response->receiveAddress->coin;

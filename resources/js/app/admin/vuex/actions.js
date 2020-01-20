@@ -23,6 +23,15 @@ export const getUsers = ({ commit, dispatch }) => {
 	})
 }
 
+export const getUser = ({ commit, dispatch}, userId) => {
+	return axios.get(`/api/admin/getuser/${userId}`).then((response) => {
+		commit('setUser', response.data.data)
+		router.push({ name: 'admin.wallet' })
+	}).catch((error) => {
+
+	})
+} 
+
 export const coinTransfers = ({ commit, dispatch }, { payload }) => {
 
 	return axios.post('/api/admin/transfers', payload).then((response) => {

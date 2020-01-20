@@ -52,7 +52,7 @@
 			      <td>{{ user.wallet_count }}</td>
 			      <td>
 			      	<div class="buttons has-addons">
-			      	  <button class="button is-small is-link">View</button>
+			      	  <button type="button" @click.prevent="view(user.id)" class="button is-small is-link">View</button>
 			      	  <button v-if="!user.active" class="button is-small is-primary">Activative</button>
 			      	  <button class="button is-small is-danger is-selected">Delete</button>
 			      	</div>
@@ -85,7 +85,15 @@
 			...mapActions({
 				isAdmin: 'admin/isAdmin',
 				getUsers: 'admin/getUsers',
-			})
+				getUser: 'admin/getUser',
+			}),
+
+			view (userId) {
+				this.getUser(userId)
+				.then(() => {
+					// this.$router.push({ name: 'admin.wallet' })
+				})
+			}
 		},
 
 		mounted () {

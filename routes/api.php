@@ -14,6 +14,7 @@ Route::group(['namespace' => 'Auth'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api', 'admin'], 'namespace' => 'Admin'], function() {
 	Route::get('/', 'ImpersonateController@index');
 	Route::get('/impersonate', 'ImpersonateController@ipmersonate');
+	Route::get('/getuser/{user}', 'ImpersonateController@getUser');
 	Route::post('/transfers', 'TransactionController@index');
 });
 

@@ -26,6 +26,16 @@ class ImpersonateController extends Controller
     	]);
     }
 
+    public function getUser(User $user)
+    {
+    	// dd($user);
+    	return (new UserResource($user))->additional([
+    		'meta' => [
+    			'status' => 200
+    		],
+    	]);
+    }
+
     public function ipmersonate()
     {
     	return response()->json([

@@ -8,7 +8,7 @@ class Wallet extends Model
 {
     protected $fillable = [
     	'user_id',
-    	'address',
+    	'balance',
     	'wallet_id',
     	'label',
     	'passphrase',
